@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Message from './components/Message';
+import Console from './components/Console';
 import './App.css';
 
 class App extends Component {
@@ -11,6 +12,9 @@ class App extends Component {
                <h1>code_breaker</h1>
                <Message name='start'/>
             </header>
+            <div className="main">
+                <Console/>
+            </div>
         </div>
 
 

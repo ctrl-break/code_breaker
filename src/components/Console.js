@@ -1,16 +1,38 @@
 import React, { Component } from 'react';
-//import PropTypes from 'prop-types';
-
-import './Console.css';
+import ReactTerminal, { ReactThemes, ReactOutputRenderers } from 'react-terminal-component';
+import {
+  EmulatorState, OutputFactory, CommandMapping, Outputs
+} from 'javascript-terminal';
 
 class Console extends Component {
   render() {
-    return ;
+    const customState = EmulatorState.create({
+          'commandMapping': CommandMapping.create({
+            'start': {
+              'function': (state, opts) => {
+                return {
+                  state: state.setOutputs( Outputs.create() ),
+                  output: OutputFactory.makeTextOutput(`Let's start a game.`)
+                };
+              },
+              'optDef': {}
+            },
+            'clear': {
+              'function': (state, opts ) => {
+                  return { state: state.setOutputs( Outputs.create() )}
+               },
+               'optDef': {}
+            },
+          })
+    });
+    return (<div className="console">
+              <ReactTerminal
+                  theme={ReactThemes.sea}
+                  promptSymbol='>‍'
+                  emulatorState={customState}
+              />
+            </div>);
   }
 }
-
-// Console.propTypes = {
-//   name: PropTypes.string
-// };
 
 export default Console;
