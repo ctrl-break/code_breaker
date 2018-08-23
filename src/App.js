@@ -9,7 +9,7 @@ class App extends Component {
         <div className="container">
             <header>
                <h1>code_breaker</h1>
-               <Message name='star1t'/>
+               <Message name='start'/>
             </header>
         </div>
 

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import './Message.css';
 
 const messages = {
-  'start' : 'Welcome'
+  'start' : 'To start the game, type start',
+  'game' : 'Type a code'
 }
 
 
