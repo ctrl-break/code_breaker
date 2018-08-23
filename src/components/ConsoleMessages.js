@@ -17,3 +17,7 @@ export const noValidNumber = () => {
 export const input = (input) => {
   return OutputFactory.makeTextOutput(input);
 }
+
+export const win = () => {
+  return OutputFactory.makeTextOutput('You win! Type start to begin new game');
+}

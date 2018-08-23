@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactTerminal, {ReactThemes} from 'react-terminal-component';
 import {EmulatorState, OutputFactory, CommandMapping, Outputs} from 'javascript-terminal';
-import {randomCode, isValidCode} from '../utils/code';
+import {randomCode, isValidCode, compareCodes} from '../utils/code';
 import * as Print from './ConsoleMessages';
 
 class Console extends Component {
@@ -10,6 +10,12 @@ class Console extends Component {
     this.state = {
         code: null
     };
+  }
+
+  checkPlayerCode = (code) => {
+    if (code === this.state.code) return true;
+
+    return compareCodes(code, this.state.code);
   }
 
   render() {
@@ -38,12 +44,20 @@ class Console extends Component {
             if (!this.state.code) {
               return { output: Print.empty() };
             }
+
             const input = opts.join(' ');
             if (!isValidCode(input)) {
               return { output: Print.noValidNumber()};
             }
 
-            return { output: Print.input(input) };
+            let result = this.checkPlayerCode(input);
+            console.log('---', result);
+            if (result === true) {
+              this.setState({ code: null });
+              return { output: Print.win() };
+            }
+
+            return { output: Print.input(result) };
           },
           'optDef': {}
         }
